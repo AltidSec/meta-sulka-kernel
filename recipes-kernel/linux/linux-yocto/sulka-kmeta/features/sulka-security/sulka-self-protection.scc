@@ -3,3 +3,8 @@ define KFEATURE_DESCRIPTION "Enable hardening and self-protection options"
 define KFEATURE_COMPATIBILITY all
 
 kconf non-hardware sulka-self-protection.cfg
+kconf non-hardware sulka-self-protection-ubsan.cfg
+
+if [ "$KARCH" = "x86_64" ]; then
+    kconf non-hardware sulka-self-protection-x86_64.cfg
+fi
