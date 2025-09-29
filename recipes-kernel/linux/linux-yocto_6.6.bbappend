@@ -4,7 +4,7 @@ SRC_URI:append:sulka = " \
     file://sulka-kmeta;type=kmeta;name=sulka-kmeta;destsuffix=sulka-kmeta \
 "
 
-KERNEL_FEATURES:append:sulka = " \
+KERNEL_FEATURES:append:sulka-harden-kernel = " \
     features/security/security.cfg \
     features/sulka-security/audit.scc \
     features/sulka-security/sulka-cut-attack-surface.scc \
