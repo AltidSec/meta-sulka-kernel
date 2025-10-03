@@ -16,3 +16,5 @@ KERNEL_FEATURES:append:sulka-harden-kernel = " \
 KERNEL_FEATURES:append:sulka-disable-graphics = " \
     features/sulka-security/sulka-cut-graphics.scc \
 "
+
+KERNEL_FEATURES:append:sulka-development-mode = " features/sulka-security/sulka-kernel-develop.scc "
