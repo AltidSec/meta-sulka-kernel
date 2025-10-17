@@ -8,3 +8,7 @@ kconf non-hardware sulka-self-protection-ubsan.cfg
 if [ "$KARCH" = "x86_64" ]; then
     kconf non-hardware sulka-self-protection-x86_64.cfg
 fi
+
+if [ "$KARCH" = "arm64" ]; then
+    kconf non-hardware sulka-self-protection-arm64.cfg
+fi
