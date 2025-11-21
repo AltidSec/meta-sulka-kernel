@@ -8,3 +8,10 @@ The hardening is based on the suggestions from [kernel-hardening-checker by a13x
 This kernel metadata and configuration is assumed to be used with `linux-yocto` as a part of the Sulka build.
 However, it should be possible to use the metadata with other kernel recipes as well, assuming the versions do not differ too much.
 If you intend to use this meta-layer outside Sulka build or with a different kernel recipe, it is recommended to write your own `.bbappend` for the kernel as the one in this meta-layer uses Sulka overrides.
+
+## Contributing
+
+Send pull requests, patches, comments or questions to the AltidSec repositories in Codeberg, and feel free to open issues to start discussions. Use `*-next` branches as pull request targets.
+
+Maintainer:
+Esa Jääskelä <esa.jaaskela@suomi24.fi>
