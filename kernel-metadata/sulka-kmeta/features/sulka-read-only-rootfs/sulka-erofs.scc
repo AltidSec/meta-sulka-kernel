@@ -1,0 +1,5 @@
+# SPDX-License-Identifier: MIT
+define KFEATURE_DESCRIPTION "Enable erofs"
+define KFEATURE_COMPATIBILITY all
+
+kconf non-hardware sulka-erofs.cfg
