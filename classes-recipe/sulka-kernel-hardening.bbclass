@@ -17,6 +17,10 @@ KERNEL_FEATURES:append:sulka-disable-graphics = " \
     features/sulka-security/sulka-cut-graphics.scc \
 "
 
+KERNEL_FEATURES:append:sulka-disable-kernel-modules = " \
+    features/sulka-security/sulka-cut-kernel-modules.scc \
+"
+
 KERNEL_FEATURES:append:sulka-read-only-rootfs = " \
     features/sulka-read-only-rootfs/sulka-erofs.scc \
 "
