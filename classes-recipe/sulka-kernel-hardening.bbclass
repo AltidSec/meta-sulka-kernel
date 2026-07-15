@@ -21,6 +21,10 @@ KERNEL_FEATURES:append:sulka-disable-kernel-modules = " \
     features/sulka-security/sulka-cut-kernel-modules.scc \
 "
 
+KERNEL_FEATURES:append:sulka-enable-module-signing = " \
+    features/module-signing/force-signing.cfg \
+"
+
 KERNEL_FEATURES:append:sulka-read-only-rootfs = " \
     features/sulka-read-only-rootfs/sulka-erofs.scc \
 "
