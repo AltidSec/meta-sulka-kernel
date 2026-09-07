@@ -1,6 +1,6 @@
-FILESEXTRAPATHS:prepend:sulka := "${SULKA_KMETA_LOCATION}:"
+FILESEXTRAPATHS:prepend:sulka-hardening := "${SULKA_KMETA_LOCATION}:"
 
-SRC_URI:append:sulka = " \
+SRC_URI:append:sulka-hardening = " \
     file://sulka-kmeta;type=kmeta;name=sulka-kmeta;destsuffix=sulka-kmeta \
 "
 
