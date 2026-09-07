@@ -55,7 +55,7 @@ inherit sulka-kernel-hardening
 
 That is all that is needed. The class handles the metadata location, the `SRC_URI` entry and the feature selection on its own, so there is no reason to copy its contents into your own metadata.
 
-Note that the class keys off overrides set by the Sulka distro configuration, so it selects features when built as part of a Sulka build. If you are using this layer without a complete Sulka build, set the overrides as necessary in your own build.
+Note that the class keys off the `sulka-hardening` override and the feature overrides that go with it, not off the distro name. Requiring `conf/distro/include/sulka-hardening.inc` from `meta-sulka-distro` sets them, from any distro. Without that include, set the overrides manually as necessary in your own build.
 
 ## Layer Information
 
