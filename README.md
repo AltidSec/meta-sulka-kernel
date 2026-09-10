@@ -40,8 +40,9 @@ Which features are selected depends on overrides that the Sulka distro sets from
 The layer is not limited to build-time kernel configuration.
 `recipes-extended/procps/` appends `sulka-sysctl.conf` to `/etc/sysctl.conf`, covering BPF hardening, `ptrace` scope, kernel pointer restriction, `perf_event` access, oops and warning limits, and protected symlinks and hardlinks.
 
-That bbappend names the exact `procps` version it applies to, so this part of the layer is tied to a particular `openembedded-core` version.
-A mismatch fails the build as a dangling bbappend rather than quietly dropping the settings.
+That bbappend wildcards the patch release of the `procps` version it targets, so it should apply to `wrynose` recipes regardless of the exact used Yocto version.
+A version that does not line up fails the build as a dangling bbappend rather than quietly dropping the settings.
+The [kas Sulka](https://codeberg.org/AltidSec/kas-sulka) build configuration pins the combination of meta-layers each release is tested against.
 
 ## Using This Layer With Another Kernel Recipe
 
