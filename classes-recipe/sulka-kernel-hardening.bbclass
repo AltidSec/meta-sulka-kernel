@@ -13,6 +13,12 @@ KERNEL_FEATURES:append:sulka-harden-kernel = " \
     features/sulka-security/sulka-self-protection.scc \
 "
 
+# Bundling the initramfs compiles the kernel again with a new structure layout
+# seed, while the modules can come from the shared state cache with the old
+# one. The kernel then refuses to load the modules, so disable the structure
+# layout randomization of sulka-self-protection when the initramfs is bundled.
+KERNEL_FEATURES:append:sulka-harden-kernel = "${@' features/sulka-security/sulka-no-randstruct.scc' if d.getVar('INITRAMFS_IMAGE_BUNDLE') == '1' else ''}"
+
 KERNEL_FEATURES:append:sulka-disable-graphics = " \
     features/sulka-security/sulka-cut-graphics.scc \
 "

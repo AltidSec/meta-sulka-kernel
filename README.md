@@ -17,6 +17,7 @@ The kernel configuration lives under `kernel-metadata/sulka-kmeta/features/` as 
 |---|---|
 | `sulka-security/sulka-cut-attack-surface` | Removes legacy and rarely needed kernel interfaces |
 | `sulka-security/sulka-self-protection` | Enables the kernel's own self-protection mechanisms |
+| `sulka-security/sulka-no-randstruct` | Disables the structure layout randomization of `sulka-self-protection` |
 | `sulka-security/sulka-harden-userspace` | Hardens the kernel/userspace boundary |
 | `sulka-security/sulka-security-policy` | Configures the security policy and LSM support |
 | `sulka-security/audit` | Enables the kernel audit subsystem |
