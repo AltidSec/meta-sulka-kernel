@@ -19,6 +19,22 @@ KERNEL_FEATURES:append:sulka-harden-kernel = " \
 # layout randomization of sulka-self-protection when the initramfs is bundled.
 KERNEL_FEATURES:append:sulka-harden-kernel = "${@' features/sulka-security/sulka-no-randstruct.scc' if d.getVar('INITRAMFS_IMAGE_BUNDLE') == '1' else ''}"
 
+# The module signing key and the trusted keys are built into the kernel, and
+# the modules are signed with the key, but the task hashes only contain the
+# paths of the keys. New keys at the same path would then mix modules signed
+# with the old key from the shared state cache with a kernel built again with
+# the new keys, which refuses to load them. Add the contents of the keys to
+# the task hashes.
+def sulka_kernel_key_checksums(d):
+    keys = []
+    if bb.data.inherits_class('kernel-modsign', d):
+        keys += [d.getVar('MODSIGN_PRIVKEY'), d.getVar('MODSIGN_X509')]
+    if bb.utils.contains('DISTRO_FEATURES', 'ima', True, False, d):
+        keys.append(d.getVar('IMA_EVM_ROOT_CA'))
+    return ' '.join('%s:True' % key for key in keys if key)
+
+do_configure[file-checksums] += "${@sulka_kernel_key_checksums(d)}"
+
 KERNEL_FEATURES:append:sulka-disable-graphics = " \
     features/sulka-security/sulka-cut-graphics.scc \
 "
