@@ -51,4 +51,8 @@ KERNEL_FEATURES:append:sulka-read-only-rootfs = " \
     features/sulka-read-only-rootfs/sulka-erofs.scc \
 "
 
+KERNEL_FEATURES:append:sulka-dm-verity = " \
+    features/device-mapper/dm-verity.scc \
+"
+
 KERNEL_FEATURES:append:sulka-development-mode = " features/sulka-security/sulka-kernel-develop.scc "
