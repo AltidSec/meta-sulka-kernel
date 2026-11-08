@@ -32,7 +32,7 @@ Several features carry architecture-specific fragments (`-x86_64`, `-arm64`) tha
 
 `classes-recipe/sulka-kernel-hardening.bbclass` wires the metadata into the kernel recipe.
 It adds `kernel-metadata` to `SRC_URI` as a `kmeta` source and selects the feature sets above through `KERNEL_FEATURES`.
-Which features are selected depends on overrides that the Sulka distro sets from its configuration, so hardening, graphics removal, module removal, module signing, read-only rootfs and development mode each pull in their own set.
+Which features are selected depends on overrides that the Sulka distro sets from its configuration, so hardening, graphics removal, module removal, module signing, read-only rootfs, dm-verity and development mode each pull in their own set.
 The class also adds the contents of the module signing keys and the IMA root CA to the kernel task hashes.
 New keys at the same path then build the kernel and its modules again, instead of reusing modules signed with the old key from the shared state cache.
 
@@ -57,7 +57,17 @@ To use it elsewhere, write your own bbappend for your kernel recipe and inherit 
 inherit sulka-kernel-hardening
 ```
 
-That is all that is needed. The class handles the metadata location, the `SRC_URI` entry and the feature selection on its own, so there is no reason to copy its contents into your own metadata.
+In addition, the kernel recipe does need to process kernel metadata, which means inheriting `kernel-yocto` and fetching the [yocto-kernel-cache](https://git.yoctoproject.org/yocto-kernel-cache) as a `kmeta` source.
+The `sulka-kernel-hardening` class selects features from the cache, and `kernel-yocto` is required for correct feature parsing.
+`linux-yocto` and, for example, `linux-raspberrypi` both fetch the cache. For a recipe that does not, add the class and cache in your bbappend, using the cache branch that matches the kernel version:
+
+```
+KMETA = "kernel-meta"
+SRC_URI += "git://git.yoctoproject.org/yocto-kernel-cache;type=kmeta;name=meta;branch=yocto-6.18;destsuffix=${KMETA};protocol=https"
+SRCREV_meta = "<commit from the yocto-6.18 branch>"
+```
+
+Without the cache, the kernel configuration fails with `Feature '...' not found`.
 
 Note that the class keys off the `sulka-hardening` override and the feature overrides that go with it, not off the distro name. Requiring `conf/distro/include/sulka-hardening.inc` from `meta-sulka-distro` sets them, from any distro. Without that include, set the overrides manually as necessary in your own build.
 
