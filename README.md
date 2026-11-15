@@ -33,7 +33,7 @@ Several features carry architecture-specific fragments (`-x86_64`, `-arm64`) tha
 `classes-recipe/sulka-kernel-hardening.bbclass` wires the metadata into the kernel recipe.
 It adds `kernel-metadata` to `SRC_URI` as a `kmeta` source and selects the feature sets above through `KERNEL_FEATURES`.
 Which features are selected depends on overrides that the Sulka distro sets from its configuration, so hardening, graphics removal, module removal, module signing, read-only rootfs, dm-verity and development mode each pull in their own set.
-The class also adds the contents of the module signing keys and the IMA root CA to the kernel task hashes.
+The class also adds the contents of the module signing certificate and the IMA root CA to the kernel task hashes.
 New keys at the same path then build the kernel and its modules again, instead of reusing modules signed with the old key from the shared state cache.
 
 `recipes-kernel/linux/linux-yocto_6.18.bbappend` inherits that class for the kernel version Sulka targets.

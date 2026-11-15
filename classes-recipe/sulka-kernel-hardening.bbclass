@@ -23,12 +23,14 @@ KERNEL_FEATURES:append:sulka-harden-kernel = "${@' features/sulka-security/sulka
 # the modules are signed with the key, but the task hashes only contain the
 # paths of the keys. New keys at the same path would then mix modules signed
 # with the old key from the shared state cache with a kernel built again with
-# the new keys, which refuses to load them. Add the contents of the keys to
-# the task hashes.
+# the new keys, which refuses to load them. Add the contents of the
+# certificates to the task hashes. A new key pair always has a new
+# certificate, so the private key is left out to keep its checksum out of the
+# task signatures.
 def sulka_kernel_key_checksums(d):
     keys = []
     if bb.data.inherits_class('kernel-modsign', d):
-        keys += [d.getVar('MODSIGN_PRIVKEY'), d.getVar('MODSIGN_X509')]
+        keys.append(d.getVar('MODSIGN_X509'))
     if bb.utils.contains('DISTRO_FEATURES', 'ima', True, False, d):
         keys.append(d.getVar('IMA_EVM_ROOT_CA'))
     return ' '.join('%s:True' % key for key in keys if key)
